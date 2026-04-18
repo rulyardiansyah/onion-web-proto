@@ -1,70 +1,50 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
-import {
-  useDesigner,
-  SCREEN_OPTIONS,
-} from "@/store/designer-store";
+import { useDesigner, SCREEN_OPTIONS } from "@/store/designer-store";
 
 export default function LeftColumn() {
   const { state, dispatch } = useDesigner();
-
-  const selectedScreen = SCREEN_OPTIONS.find(
-    (s) => s.id === state.selectedScreenId
-  );
+  const selectedScreen = SCREEN_OPTIONS.find((s) => s.id === state.selectedScreenId);
 
   return (
-    <aside className="w-64 bg-white border-r border-border flex flex-col shrink-0 overflow-y-auto">
-      {/* Breadcrumb */}
-      <div className="px-4 pt-4 pb-2">
-        <div className="flex items-center text-sm text-text-secondary gap-1">
+    <aside className="left-col">
+      <div className="left-col__breadcrumb">
+        <div className="left-col__breadcrumb-trail">
           <span>Aplikasi</span>
           <span>/</span>
-          <span className="text-primary font-medium">Desain</span>
+          <span className="active">Desain</span>
           <ChevronRight size={14} />
         </div>
-        <h2 className="text-base font-semibold mt-1 flex items-center gap-2">
-          <ChevronRight size={16} className="text-primary" />
+        <h2 className="left-col__title">
+          <ChevronRight size={16} />
           Pengaturan Desain
         </h2>
       </div>
 
-      {/* Screen Selector */}
-      <div className="px-4 py-3 border-t border-border">
-        <label className="text-xs font-medium text-text-secondary block mb-1.5">
-          Desain
-        </label>
+      <div className="left-col__section">
+        <label className="left-col__label">Desain</label>
         <select
+          className="left-col__select"
           value={state.selectedScreenId}
-          onChange={(e) =>
-            dispatch({ type: "SELECT_SCREEN", screenId: e.target.value })
-          }
-          className="w-full border border-border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary appearance-none cursor-pointer"
+          onChange={(e) => dispatch({ type: "SELECT_SCREEN", screenId: e.target.value })}
         >
           {SCREEN_OPTIONS.map((screen) => (
-            <option key={screen.id} value={screen.id}>
-              {screen.label}
-            </option>
+            <option key={screen.id} value={screen.id}>{screen.label}</option>
           ))}
         </select>
       </div>
 
-      {/* Dynamic Inputs */}
-      <div className="px-4 py-3 border-t border-border flex-1">
+      <div className="left-col__section--grow">
         {state.selectedScreenId === "identity" && <IdentityInputs />}
         {state.selectedScreenId !== "identity" && selectedScreen && (
           <ScreenInfo screenLabel={selectedScreen.label} componentCount={selectedScreen.components.length} />
         )}
       </div>
 
-      {/* Action Buttons */}
-      <div className="px-4 py-4 border-t border-border flex gap-2">
-        <button className="px-4 py-2 text-sm rounded-full border border-primary text-primary hover:bg-primary-light transition-colors">
-          Reset
-        </button>
-        <button className="px-4 py-2 text-sm rounded-full bg-primary text-white hover:bg-primary-dark transition-colors">
-          Simpan
-        </button>
+      <div className="left-col__actions">
+        <button className="btn-highlight">Reset</button>
+        <button className="btn-cta">Simpan</button>
       </div>
     </aside>
   );
@@ -74,60 +54,36 @@ function IdentityInputs() {
   const { state, dispatch } = useDesigner();
 
   return (
-    <div className="space-y-4">
-      <div>
-        <label className="text-xs font-medium text-text-secondary block mb-1.5">
-          Nama Aplikasi
-        </label>
+    <div className="left-col__form">
+      <div className="left-col__form-field">
+        <label className="left-col__label">Nama Aplikasi</label>
         <input
           type="text"
+          className="left-col__input"
           value={state.identityForm.appName}
-          onChange={(e) =>
-            dispatch({
-              type: "UPDATE_IDENTITY",
-              field: "appName",
-              value: e.target.value,
-            })
-          }
-          className="w-full border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+          onChange={(e) => dispatch({ type: "UPDATE_IDENTITY", field: "appName", value: e.target.value })}
         />
       </div>
-      <div>
-        <label className="text-xs font-medium text-text-secondary block mb-1.5">
-          Nama Institusi
-        </label>
+      <div className="left-col__form-field">
+        <label className="left-col__label">Nama Institusi</label>
         <input
           type="text"
+          className="left-col__input"
           value={state.identityForm.institutionName}
-          onChange={(e) =>
-            dispatch({
-              type: "UPDATE_IDENTITY",
-              field: "institutionName",
-              value: e.target.value,
-            })
-          }
-          className="w-full border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+          onChange={(e) => dispatch({ type: "UPDATE_IDENTITY", field: "institutionName", value: e.target.value })}
         />
       </div>
-      <div>
-        <label className="text-xs font-medium text-text-secondary block mb-1.5">
-          Ikon Aplikasi
-        </label>
-        <div className="flex items-center gap-2 border border-border rounded-lg px-3 py-2">
-          <div className="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center">
-            <span className="text-primary text-xs font-bold">O</span>
+      <div className="left-col__form-field">
+        <label className="left-col__label">Ikon Aplikasi</label>
+        <div className="left-col__file-preview">
+          <div className="left-col__file-icon">O</div>
+          <div className="left-col__file-info">
+            <p className="left-col__file-name">{state.identityForm.appIcon}</p>
+            <p className="left-col__file-size">1.24 MB</p>
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm truncate">{state.identityForm.appIcon}</p>
-            <p className="text-xs text-text-secondary">1.24 MB</p>
-          </div>
-          <button className="text-text-secondary hover:text-red-500 text-lg leading-none">
-            &times;
-          </button>
+          <button className="left-col__file-remove">&times;</button>
         </div>
-        <p className="text-xs text-text-secondary mt-1.5">
-          944px x 224px, transparan, rata kiri.
-        </p>
+        <p className="left-col__hint">944px x 224px, transparan, rata kiri.</p>
       </div>
     </div>
   );
@@ -135,14 +91,9 @@ function IdentityInputs() {
 
 function ScreenInfo({ screenLabel, componentCount }: { screenLabel: string; componentCount: number }) {
   return (
-    <div className="space-y-3">
-      <p className="text-sm text-text-secondary">
-        Layar <span className="font-medium text-text-primary">{screenLabel}</span> memiliki{" "}
-        <span className="font-medium text-text-primary">{componentCount}</span> komponen.
-      </p>
-      <p className="text-xs text-text-secondary">
-        Atur tata letak komponen pada kanvas di tengah. Pilih komponen untuk mengedit propertinya di panel kanan.
-      </p>
+    <div className="left-col__screen-info">
+      <p>Layar <span>{screenLabel}</span> memiliki <span>{componentCount}</span> komponen.</p>
+      <small>Atur tata letak komponen pada kanvas di tengah. Pilih komponen untuk mengedit propertinya di panel kanan.</small>
     </div>
   );
 }

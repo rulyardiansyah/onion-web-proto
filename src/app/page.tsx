@@ -7,14 +7,13 @@ import RightColumn from "@/components/RightColumn";
 export default function Home() {
   return (
     <DesignerProvider>
-      {/* Main Navigation (Left Sidebar) */}
-      <MainNavigation />
-
-      {/* Main Panel (3 Columns) */}
-      <div className="flex flex-1 overflow-hidden">
-        <LeftColumn />
-        <CenterColumn />
-        <RightColumn />
+      <div className="app-shell">
+        <MainNavigation />
+        <div className="main-panel">
+          <LeftColumn />
+          <CenterColumn />
+          <RightColumn />
+        </div>
       </div>
     </DesignerProvider>
   );

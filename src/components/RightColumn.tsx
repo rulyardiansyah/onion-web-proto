@@ -24,38 +24,23 @@ export default function RightColumn() {
   const { state, dispatch } = useDesigner();
 
   return (
-    <aside className="w-72 bg-white border-l border-border flex flex-col shrink-0 overflow-hidden">
-      {/* Tabs */}
-      <div className="flex border-b border-border">
+    <aside className="right-col">
+      <div className="right-col__tabs">
         <button
           onClick={() => dispatch({ type: "SET_RIGHT_TAB", tab: "properties" })}
-          className={`flex-1 text-sm py-3 font-medium transition-colors ${
-            state.rightTab === "properties"
-              ? "text-primary border-b-2 border-primary"
-              : "text-text-secondary hover:text-text-primary"
-          }`}
+          className={`right-col__tab${state.rightTab === "properties" ? " right-col__tab--active" : ""}`}
         >
           Properties
         </button>
         <button
           onClick={() => dispatch({ type: "SET_RIGHT_TAB", tab: "layers" })}
-          className={`flex-1 text-sm py-3 font-medium transition-colors ${
-            state.rightTab === "layers"
-              ? "text-primary border-b-2 border-primary"
-              : "text-text-secondary hover:text-text-primary"
-          }`}
+          className={`right-col__tab${state.rightTab === "layers" ? " right-col__tab--active" : ""}`}
         >
           Layers
         </button>
       </div>
-
-      {/* Tab Content */}
-      <div className="flex-1 overflow-y-auto">
-        {state.rightTab === "properties" ? (
-          <PropertiesPanel />
-        ) : (
-          <LayersPanel />
-        )}
+      <div className="right-col__body">
+        {state.rightTab === "properties" ? <PropertiesPanel /> : <LayersPanel />}
       </div>
     </aside>
   );
@@ -70,126 +55,69 @@ function PropertiesPanel() {
 
   if (!selectedComponent) {
     return (
-      <div className="p-6 text-center text-text-secondary">
-        <p className="text-sm">Tidak ada komponen dipilih</p>
-        <p className="text-xs mt-1">Klik komponen pada kanvas untuk mengedit propertinya.</p>
+      <div className="right-col__empty">
+        <p>Tidak ada komponen dipilih</p>
+        <small>Klik komponen pada kanvas untuk mengedit propertinya.</small>
       </div>
     );
   }
 
   return (
-    <div className="p-4 space-y-4">
-      <div className="pb-3 border-b border-border">
-        <h3 className="text-sm font-semibold">{selectedComponent.label}</h3>
-        <p className="text-xs text-text-secondary mt-0.5">
-          Tipe: {selectedComponent.type}
-        </p>
+    <div className="props-panel">
+      <div className="props-panel__header">
+        <p className="props-panel__name">{selectedComponent.label}</p>
+        <p className="props-panel__type">Tipe: {selectedComponent.type}</p>
       </div>
-
       {selectedComponent.properties.map((prop) => (
-        <div key={prop.key}>
-          <label className="text-xs font-medium text-text-secondary block mb-1.5">
-            {prop.label}
-          </label>
+        <div key={prop.key} className="props-panel__field">
+          <label className="props-panel__field-label">{prop.label}</label>
           {prop.type === "text" && (
             <input
               type="text"
+              className="props-panel__input"
               value={prop.value as string}
-              onChange={(e) =>
-                dispatch({
-                  type: "UPDATE_PROPERTY",
-                  componentId: selectedComponent.id,
-                  propertyKey: prop.key,
-                  value: e.target.value,
-                })
-              }
-              className="w-full border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              onChange={(e) => dispatch({ type: "UPDATE_PROPERTY", componentId: selectedComponent.id, propertyKey: prop.key, value: e.target.value })}
             />
           )}
           {prop.type === "color" && (
-            <div className="flex items-center gap-2">
+            <div className="props-panel__color-row">
               <input
                 type="color"
+                className="props-panel__color-swatch"
                 value={prop.value as string}
-                onChange={(e) =>
-                  dispatch({
-                    type: "UPDATE_PROPERTY",
-                    componentId: selectedComponent.id,
-                    propertyKey: prop.key,
-                    value: e.target.value,
-                  })
-                }
-                className="w-8 h-8 rounded border border-border cursor-pointer"
+                onChange={(e) => dispatch({ type: "UPDATE_PROPERTY", componentId: selectedComponent.id, propertyKey: prop.key, value: e.target.value })}
               />
               <input
                 type="text"
+                className="props-panel__input"
                 value={prop.value as string}
-                onChange={(e) =>
-                  dispatch({
-                    type: "UPDATE_PROPERTY",
-                    componentId: selectedComponent.id,
-                    propertyKey: prop.key,
-                    value: e.target.value,
-                  })
-                }
-                className="flex-1 border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                onChange={(e) => dispatch({ type: "UPDATE_PROPERTY", componentId: selectedComponent.id, propertyKey: prop.key, value: e.target.value })}
               />
             </div>
           )}
           {prop.type === "number" && (
             <input
               type="number"
+              className="props-panel__input"
               value={prop.value as number}
-              onChange={(e) =>
-                dispatch({
-                  type: "UPDATE_PROPERTY",
-                  componentId: selectedComponent.id,
-                  propertyKey: prop.key,
-                  value: parseInt(e.target.value) || 0,
-                })
-              }
-              className="w-full border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              onChange={(e) => dispatch({ type: "UPDATE_PROPERTY", componentId: selectedComponent.id, propertyKey: prop.key, value: parseInt(e.target.value) || 0 })}
             />
           )}
           {prop.type === "select" && (
             <select
+              className="props-panel__select"
               value={prop.value as string}
-              onChange={(e) =>
-                dispatch({
-                  type: "UPDATE_PROPERTY",
-                  componentId: selectedComponent.id,
-                  propertyKey: prop.key,
-                  value: e.target.value,
-                })
-              }
-              className="w-full border border-border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              onChange={(e) => dispatch({ type: "UPDATE_PROPERTY", componentId: selectedComponent.id, propertyKey: prop.key, value: e.target.value })}
             >
-              {prop.options?.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
+              {prop.options?.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
             </select>
           )}
           {prop.type === "toggle" && (
             <button
-              onClick={() =>
-                dispatch({
-                  type: "UPDATE_PROPERTY",
-                  componentId: selectedComponent.id,
-                  propertyKey: prop.key,
-                  value: !prop.value,
-                })
-              }
-              className={`relative w-10 h-5 rounded-full transition-colors ${
-                prop.value ? "bg-primary" : "bg-gray-300"
-              }`}
+              className={`props-panel__toggle${prop.value ? " props-panel__toggle--on" : " props-panel__toggle--off"}`}
+              onClick={() => dispatch({ type: "UPDATE_PROPERTY", componentId: selectedComponent.id, propertyKey: prop.key, value: !prop.value })}
             >
-              <div
-                className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
-                  prop.value ? "translate-x-5" : "translate-x-0.5"
-                }`}
-              />
+              <div className={`props-panel__toggle-thumb${prop.value ? " props-panel__toggle-thumb--on" : " props-panel__toggle-thumb--off"}`} />
             </button>
           )}
         </div>
@@ -214,27 +142,17 @@ function LayerItem({ component }: { component: CanvasComponent }) {
     <div
       ref={setNodeRef}
       style={style}
-      onClick={() =>
-        dispatch({ type: "SELECT_COMPONENT", componentId: component.id })
-      }
-      className={`flex items-center gap-2 px-3 py-2.5 cursor-pointer transition-colors border-l-2 ${
-        isSelected
-          ? "bg-primary-light border-primary"
-          : "border-transparent hover:bg-gray-50"
-      }`}
+      onClick={() => dispatch({ type: "SELECT_COMPONENT", componentId: component.id })}
+      className={`layer-item${isSelected ? " layer-item--selected" : ""}`}
     >
-      <button
-        {...attributes}
-        {...listeners}
-        className="cursor-grab active:cursor-grabbing text-text-secondary/50 hover:text-text-secondary"
-      >
+      <button {...attributes} {...listeners} className="layer-item__drag">
         <GripVertical size={14} />
       </button>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium truncate">{component.label}</p>
-        <p className="text-[10px] text-text-secondary">{component.type}</p>
+      <div className="layer-item__info">
+        <p className="layer-item__name">{component.label}</p>
+        <p className="layer-item__type">{component.type}</p>
       </div>
-      <button className="text-text-secondary hover:text-text-primary">
+      <button className="layer-item__vis">
         <Eye size={14} />
       </button>
     </div>
@@ -267,24 +185,17 @@ function LayersPanel() {
 
   if (state.canvasComponents.length === 0) {
     return (
-      <div className="p-6 text-center text-text-secondary">
-        <p className="text-sm">Tidak ada layer</p>
-        <p className="text-xs mt-1">Pilih layar dengan komponen untuk melihat layer.</p>
+      <div className="right-col__empty">
+        <p>Tidak ada layer</p>
+        <small>Pilih layar dengan komponen untuk melihat layer.</small>
       </div>
     );
   }
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-    >
-      <SortableContext
-        items={state.canvasComponents.map((c) => c.id)}
-        strategy={verticalListSortingStrategy}
-      >
-        <div className="divide-y divide-border">
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={state.canvasComponents.map((c) => c.id)} strategy={verticalListSortingStrategy}>
+        <div className="layers-panel">
           {state.canvasComponents.map((comp) => (
             <LayerItem key={comp.id} component={comp} />
           ))}

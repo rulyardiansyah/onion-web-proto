@@ -1,27 +1,22 @@
-@import "tailwindcss";
+@import "./catalyst-tokens.css";
+@import "./styles.css";
 
-@theme inline {
-  --color-primary: #00bcd4;
-  --color-primary-dark: #0097a7;
-  --color-primary-light: #e0f7fa;
-  --color-sidebar-bg: #f0f4f8;
-  --color-panel-bg: #f8fafc;
-  --color-canvas-bg: #e8ecf0;
-  --color-border: #e2e8f0;
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #64748b;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-* {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-body {
-  background: #f0f4f8;
-  color: var(--color-text-primary);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+html, body {
+  height: 100%;
   margin: 0;
+  padding: 0;
   overflow: hidden;
+}
+
+body {
+  background: var(--cat-fill-primary);
+  color: var(--cat-text-default);
+  font-family: var(--font-maven-pro), "Maven Pro", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }

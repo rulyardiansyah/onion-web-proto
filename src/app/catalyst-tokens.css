@@ -1,0 +1,118 @@
+/*
+ * Catalyst Design System Tokens
+ * Auto-mapped from SCSS variables in src/app/catalyst/
+ * Do not edit token values directly — re-run the Style Dictionary build instead.
+ */
+
+:root {
+  /* ─── Surface: Brand ─────────────────────────────────────── */
+  --cat-brand-begin: #1fc4c7;
+  --cat-brand-end: #158edf;
+  --cat-brand-gradient: linear-gradient(135deg, #1fc4c7 0%, #158edf 100%);
+
+  /* ─── Surface: General (Light) ───────────────────────────── */
+  --cat-fill-primary: #f5f9ff;
+  --cat-fill-complementary: #ffffff;
+  --cat-fill-subtle: #e7eeff;
+  --cat-fill-subtle-darker: #a4abbb;
+  --cat-fill-hover: #e9f9f9;
+  --cat-fill-selected: #e9f9f9;
+  --cat-border: #eef3ff;
+
+  /* ─── Surface: Semantic (Light) ──────────────────────────── */
+  --cat-highlight-fill: #e9f9f9;
+  --cat-highlight-border: #1fc4c7;
+  --cat-info-fill: #e8f4fc;
+  --cat-info-solid: #158edf;
+  --cat-success-fill: #f4faf2;
+  --cat-success-solid: #94ca7d;
+  --cat-warning-fill: #fff7ec;
+  --cat-warning-solid: #fcae40;
+  --cat-destructive-fill: #fcebf0;
+  --cat-destructive-solid: #e53866;
+  --cat-opacity-disabled: 0.4;
+
+  /* ─── Text Colors (Light) ─────────────────────────────────── */
+  --cat-text-default: #394156;
+  --cat-text-subtle: #a4abbb;
+  --cat-text-static-light: #f5f9ff;
+  --cat-text-static-dark: #292f3d;
+  --cat-text-interactive: #199d9f;
+  --cat-text-informative: #158edf;
+  --cat-text-success: #79a666;
+  --cat-text-warning: #fcae40;
+  --cat-text-destructive: #b72d52;
+  --cat-text-highlight: #f5f9ff;
+
+  /* ─── Component: Button (Light) ──────────────────────────── */
+  --cat-btn-cta-fill: linear-gradient(135deg, #1fc4c7 0%, #158edf 100%);
+  --cat-btn-cta-label: #f5f9ff;
+  --cat-btn-highlight-fill: #e9f9f9;
+  --cat-btn-highlight-fill-hover: #a5e7e9;
+  --cat-btn-highlight-border: #1fc4c7;
+  --cat-btn-highlight-label: #1fc4c7;
+  --cat-btn-destructive-fill: #e53866;
+  --cat-btn-destructive-fill-hover: #b72d52;
+  --cat-btn-destructive-label: #f5f9ff;
+  --cat-btn-border-radius-m: 4px;
+  --cat-btn-border-radius-l: 6px;
+  --cat-btn-padding-hor-m: 24px;
+  --cat-btn-padding-ver-m: 8px 10px;
+  --cat-btn-padding-hor-l: 32px;
+  --cat-btn-padding-ver-l: 12px 16px;
+
+  /* ─── Component: Input (Light) ───────────────────────────── */
+  --cat-input-fill: rgba(255, 255, 255, 0.8);
+  --cat-input-border: #e7eeff;
+  --cat-input-border-hover: #1fc4c7;
+  --cat-input-text: #394156;
+  --cat-input-text-interactive: #199d9f;
+  --cat-input-text-destructive: #b72d52;
+  --cat-input-border-radius-m: 4px;
+  --cat-input-border-radius-l: 6px;
+  --cat-input-padding-m: 6px 8px;
+  --cat-input-padding-l: 8px 10px;
+
+  /* ─── Component: Navigation (Side Nav / Light) ───────────── */
+  --cat-nav-fill: rgba(255, 255, 255, 0.8);
+  --cat-nav-indicator-fill: #e9f9f9;
+  --cat-nav-indicator-bar: linear-gradient(135deg, #1fc4c7 0%, #158edf 100%);
+  --cat-nav-title-default: #394156;
+  --cat-nav-title-active: linear-gradient(135deg, #1fc4c7 0%, #158edf 100%);
+  --cat-nav-border-radius: 8px;
+  --cat-nav-icon-size: 32px;
+  --cat-nav-padding: 12px;
+  --cat-nav-gap: 24px;
+
+  /* ─── Component: Tab (Light) ─────────────────────────────── */
+  --cat-tab-title-default: #a4abbb;
+  --cat-tab-title-active: #199d9f;
+  --cat-tab-indicator: #1fc4c7;
+  --cat-tab-fill-active: #ffffff;
+  --cat-tab-container-fill: #e7eeff;
+
+  /* ─── Component: Bar / Side Nav (Light) ──────────────────── */
+  --cat-bar-sidenav-fill: #ffffff;
+  --cat-bar-sidenav-toggler-fill: #f5f9ff;
+  --cat-bar-sidenav-padding-hor: 16px;
+  --cat-bar-sidenav-padding-ver: 24px;
+  --cat-bar-sidenav-gap: 1px;
+  --cat-bar-sidenav-logo-height: 32px;
+
+  /* ─── Component: Icon / Main Menu (Light) ────────────────── */
+  --cat-icon-menu-active: linear-gradient(135deg, #1fc4c7 0%, #158edf 100%);
+  --cat-icon-menu-inactive: #525c72;
+  --cat-icon-general: #525c72;
+
+  /* ─── Component: Containment / Sheet (Light) ─────────────── */
+  --cat-sheet-fill: #ffffff;
+  --cat-sheet-text: #394156;
+  --cat-sheet-border-radius: 16px;
+  --cat-sheet-padding-hor: 24px;
+
+  /* ─── Component: Alert (Light) ───────────────────────────── */
+  --cat-alert-fill: #ffffff;
+  --cat-alert-text: #394156;
+  --cat-alert-border-radius-m: 8px;
+  --cat-alert-border-radius-l: 16px;
+}
