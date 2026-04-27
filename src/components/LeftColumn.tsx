@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
+import { useRef } from "react";
+import { ChevronRight, ImagePlus } from "lucide-react";
 import { useDesigner, SCREEN_OPTIONS } from "@/store/designer-store";
 
 export default function LeftColumn() {
@@ -52,6 +53,22 @@ export default function LeftColumn() {
 
 function IdentityInputs() {
   const { state, dispatch } = useDesigner();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      dispatch({ type: "UPDATE_IDENTITY", field: "appIcon", value: ev.target?.result as string });
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  }
+
+  function handleRemove() {
+    dispatch({ type: "UPDATE_IDENTITY", field: "appIcon", value: null });
+  }
 
   return (
     <div className="left-col__form">
@@ -75,15 +92,42 @@ function IdentityInputs() {
       </div>
       <div className="left-col__form-field">
         <label className="left-col__label">Ikon Aplikasi</label>
-        <div className="left-col__file-preview">
-          <div className="left-col__file-icon">O</div>
-          <div className="left-col__file-info">
-            <p className="left-col__file-name">{state.identityForm.appIcon}</p>
-            <p className="left-col__file-size">1.24 MB</p>
-          </div>
-          <button className="left-col__file-remove">&times;</button>
+        <div className="icon-uploader">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleFileChange}
+          />
+          <button className="icon-uploader__drop" onClick={() => fileInputRef.current?.click()}>
+            <div className="icon-uploader__preview">
+              {state.identityForm.appIcon ? (
+                <img src={state.identityForm.appIcon} alt="App icon" />
+              ) : (
+                <div className="icon-uploader__placeholder">
+                  <ImagePlus size={20} />
+                </div>
+              )}
+            </div>
+            <div className="icon-uploader__meta">
+              <p className="icon-uploader__filename">
+                {state.identityForm.appIcon ? "Ikon terupload" : "Pilih gambar..."}
+              </p>
+              <p className="icon-uploader__instruction">512×512px, PNG/SVG transparan</p>
+            </div>
+          </button>
+          {state.identityForm.appIcon && (
+            <div className="icon-uploader__actions">
+              <button className="icon-uploader__btn" onClick={() => fileInputRef.current?.click()}>
+                Ganti
+              </button>
+              <button className="icon-uploader__btn icon-uploader__btn--remove" onClick={handleRemove}>
+                Hapus
+              </button>
+            </div>
+          )}
         </div>
-        <p className="left-col__hint">944px x 224px, transparan, rata kiri.</p>
       </div>
     </div>
   );

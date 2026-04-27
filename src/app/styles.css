@@ -248,6 +248,110 @@
   margin-top: 6px;
 }
 
+/* Icon uploader */
+.icon-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.icon-uploader__drop {
+  border: 2px dashed var(--cat-input-border);
+  border-radius: var(--cat-input-border-radius-l);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+
+.icon-uploader__drop:hover {
+  border-color: var(--cat-input-border-hover);
+  background: var(--cat-highlight-fill);
+}
+
+.icon-uploader__preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--cat-fill-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-uploader__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icon-uploader__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cat-text-subtle);
+}
+
+.icon-uploader__meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.icon-uploader__filename {
+  font-size: 0.8125rem;
+  color: var(--cat-text-default);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 2px;
+}
+
+.icon-uploader__instruction {
+  font-size: 0.75rem;
+  color: var(--cat-text-subtle);
+  margin: 0;
+}
+
+.icon-uploader__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-uploader__btn {
+  font-size: 0.75rem;
+  font-family: inherit;
+  padding: 4px 10px;
+  border-radius: var(--cat-btn-border-radius-m);
+  cursor: pointer;
+  border: 1px solid var(--cat-btn-highlight-border);
+  color: var(--cat-btn-highlight-label);
+  background: var(--cat-btn-highlight-fill);
+  transition: background-color 0.15s;
+}
+
+.icon-uploader__btn:hover {
+  background: var(--cat-btn-highlight-fill-hover);
+}
+
+.icon-uploader__btn--remove {
+  border-color: var(--cat-destructive-solid);
+  color: var(--cat-destructive-solid);
+  background: var(--cat-destructive-fill);
+}
+
+.icon-uploader__btn--remove:hover {
+  background: #fad7e0;
+}
+
 .left-col__screen-info {
   display: flex;
   flex-direction: column;
@@ -703,6 +807,13 @@
   color: #fff;
   font-size: 10px;
   font-weight: 700;
+  overflow: hidden;
+}
+
+.phone-app__icon--brand img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .phone-app__label {
@@ -733,6 +844,13 @@
   font-size: 10px;
   font-weight: 700;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.notif-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .notif-card__title {

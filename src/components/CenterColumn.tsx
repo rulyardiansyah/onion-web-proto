@@ -223,7 +223,11 @@ function IdentityPreview() {
               </div>
             ))}
             <div className="phone-app">
-              <div className="phone-app__icon phone-app__icon--brand">{initials}</div>
+              <div className="phone-app__icon phone-app__icon--brand">
+                {state.identityForm.appIcon
+                  ? <img src={state.identityForm.appIcon} alt="App icon" />
+                  : initials}
+              </div>
               <span className="phone-app__label">{state.identityForm.appName}</span>
             </div>
           </div>
@@ -251,7 +255,11 @@ function IdentityPreview() {
               <span className="phone-app__label">Play Store</span>
             </div>
             <div className="phone-app">
-              <div className="phone-app__icon phone-app__icon--brand">{initials}</div>
+              <div className="phone-app__icon phone-app__icon--brand">
+                {state.identityForm.appIcon
+                  ? <img src={state.identityForm.appIcon} alt="App icon" />
+                  : initials}
+              </div>
               <span className="phone-app__label">{state.identityForm.appName}</span>
             </div>
           </div>
@@ -262,7 +270,11 @@ function IdentityPreview() {
       {/* Notification Preview */}
       <div style={{ position: "relative", width: "300px" }}>
         <div className="notif-card">
-          <div className="notif-card__icon">{initials}</div>
+          <div className="notif-card__icon">
+            {state.identityForm.appIcon
+              ? <img src={state.identityForm.appIcon} alt="App icon" />
+              : initials}
+          </div>
           <div>
             <p className="notif-card__title">{state.identityForm.appName}</p>
             <p className="notif-card__body">Ini adalah contoh notifikasi dari aplikasi mobile banking Anda.</p>

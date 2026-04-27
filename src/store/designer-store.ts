@@ -137,7 +137,7 @@ export const SCREEN_OPTIONS: ScreenConfig[] = [
 export interface IdentityFormData {
   appName: string;
   institutionName: string;
-  appIcon: string;
+  appIcon: string | null;
 }
 
 export interface DesignerState {
@@ -155,7 +155,7 @@ export const initialState: DesignerState = {
   identityForm: {
     appName: "ONION",
     institutionName: "DAKSA Indonesia",
-    appIcon: "icon-onion.png",
+    appIcon: null,
   },
   rightTab: "properties",
 };
@@ -174,7 +174,7 @@ export type DesignerAction =
   | {
       type: "UPDATE_IDENTITY";
       field: keyof IdentityFormData;
-      value: string;
+      value: string | null;
     };
 
 export function designerReducer(
